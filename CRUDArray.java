@@ -25,8 +25,10 @@ public class CRUDArray {
 				System.out.println("\n\n     LISTA DE\n     TAREAS\n-----------------\n\n");
 				contador = 0;
 				if (titulo[0] != null) {
+					contador = 0;
 					do {
 						System.out.println(contador + ". " + titulo[contador] + " -- " + fechaLimite[contador]);
+						contador++;
 					} while (contador <= longitud && titulo[contador] != null);
 				} else {
 					System.out.println("La lista está vacía");
@@ -42,6 +44,7 @@ public class CRUDArray {
 							} else {
 								errorLleno();
 							}
+							contador++;
 
 						} while (contador < titulo.length && !encontrado);
 						nuevaDescripcion = anadirDescripcion();
@@ -72,7 +75,7 @@ public class CRUDArray {
 						errorLleno();
 					}
 
-				} while (contador < titulo.length && !encontrado);
+				} while (contador <= titulo.length && !encontrado);
 				nuevaDescripcion = anadirDescripcion();
 				descripcion[contador] = nuevaDescripcion;
 
