@@ -7,83 +7,86 @@ public class CRUDArray {
 		int selector = 0;
 		int contador = -1;
 		boolean encontrado = false;
-		String[] titulo = new String[20];
-		String[] descripcion = new String[20];
-		Date[] fechaLimite = new Date[20];
+		String[] titulo = new String[2];
+		String[] descripcion = new String[2];
+		Date[] fechaLimite = new Date[2];
 		String nuevoTitulo = new String();
 		String nuevaDescripcion = new String();
 		Date nuevaFecha = null;
 		int longitud = titulo.length;
 		char sino = 'n';
+		boolean ListaVacia = true;
+	
 
-		System.out.println("====EVIL CORP====\n   TAREAS 0.1    \n-----------------");
 		do {
 			selector = menu();
 			switch (selector) {
 			case 1: {
 				// Aqui se listan todas las tareas
-				System.out.println("\n\n     LISTA DE\n     TAREAS\n-----------------\n\n");
+				System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
 				contador = 0;
-				if (titulo[0] != null) {
-					contador = 0;
-					do {
-						System.out.println(contador + ". " + titulo[contador] + " -- " + fechaLimite[contador]);
-						contador++;
-					} while (contador <= longitud && titulo[contador] != null);
-				} else {
+				while (contador < longitud) {
+					if (titulo[contador] != null) {
+						ListaVacia = false;
+						System.out.println(contador + ". " + titulo[contador] + " -- " + descripcion[contador] + " -- "
+								+ fechaLimite[contador]);
+					}
+					contador++;
+				}
+				if (ListaVacia) {
+					// si no hay tareas, se añade una
 					System.out.println("La lista está vacía");
 					sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
-					switch (sino) {
-					case 's': {
-						nuevoTitulo = anadirTitulo();
+					if (sino == 's') {
 						contador = 0;
 						do {
 							if (titulo[contador] == null) {
-								titulo[contador] = nuevoTitulo;
 								encontrado = true;
-							} else {
-								errorLleno();
 							}
 							contador++;
+						} while (contador < longitud && !encontrado);
+						if (encontrado) {
+							nuevoTitulo = anadirTitulo();
+							titulo[contador] = nuevoTitulo;
+							nuevaDescripcion = anadirDescripcion();
+							descripcion[contador] = nuevaDescripcion;
+							nuevaFecha = anadirFecha();
+							fechaLimite[contador] = nuevaFecha;
+							System.out.println(
+									titulo[contador] + " ha sido añadido para el " + fechaLimite[contador] + "\n");
+						} else {
+							errorLleno();
+						}
 
-						} while (contador < titulo.length && !encontrado);
-						nuevaDescripcion = anadirDescripcion();
-						descripcion[contador] = nuevaDescripcion;
-
-						nuevaFecha = anadirFecha();
-						fechaLimite[contador] = nuevaFecha;
-						System.out
-								.println("\n" + titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
-						break;
-						
-						// Aquí vuelve a pedir otra tarea y no debería: PURGAR
 					}
-					default:
-						break;
-					}
+					break;
 				}
-
+				break;
 			}
 			case 2: {
-				nuevoTitulo = anadirTitulo();
 				contador = 0;
 				do {
 					if (titulo[contador] == null) {
-						titulo[contador] = nuevoTitulo;
 						encontrado = true;
 					} else {
-						errorLleno();
+						contador++;
+						if (contador == titulo.length) {
+							errorLleno();
+						}
 					}
-
-				} while (contador <= titulo.length && !encontrado);
-				nuevaDescripcion = anadirDescripcion();
-				descripcion[contador] = nuevaDescripcion;
-
-				nuevaFecha = anadirFecha();
-				fechaLimite[contador] = nuevaFecha;
-				System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+				} while (contador < longitud && !encontrado);
+				if (encontrado) {
+					nuevoTitulo = anadirTitulo();
+					titulo[contador] = nuevoTitulo;
+					nuevaDescripcion = anadirDescripcion();
+					descripcion[contador] = nuevaDescripcion;
+					nuevaFecha = anadirFecha();
+					fechaLimite[contador] = nuevaFecha;
+					System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+				}
 				break;
 			}
+
 			default:
 
 			}
@@ -94,26 +97,26 @@ public class CRUDArray {
 	private static int menu() {
 
 		int selector = Utilidades.pedirInt(
-				"1. Lista Tareas\n2. Añadir Tarea\n3. Modificar Tarea\n4. Eliminar Tarea\n5. Buscar Tarea\n6. Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
+				"\n====EVIL CORP====\n   TAREAS 0.1    \n-----------------\n\n1. Lista Tareas\n2. Añadir Tarea\n3. Modificar Tarea\n4. Eliminar Tarea\n5. Buscar Tarea\n6. Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
 		return selector;
 	}
 
 	private static String anadirTitulo() {
-		System.out.println("" + "\n\n     AÑADIR\n     TAREA\n-----------------\n\n");
+		System.out.println("" + "\n\n     AÑADIR TAREA\n-----------------\n\n");
 		String nuevoTitulo = Utilidades.PedirString("Titulo de la tarea:");
 
 		return nuevoTitulo;
 	}
 
 	private static String anadirDescripcion() {
-		System.out.println("\n\n     AÑADIR\n     DESCRIPCIÓN\n-----------------\n\n");
+		System.out.println("\n\n     AÑADIR DESCRIPCIÓN\n-----------------\n\n");
 		String nuevaDescripcion = Utilidades.PedirString("Descripción de la tarea");
 
 		return nuevaDescripcion;
 	}
 
 	private static Date anadirFecha() {
-		System.out.println("\n\n     AÑADIR\n     FECHA\n-----------------\n\n");
+		System.out.println("\n\n     AÑADIR FECHA\n-----------------\n\n");
 		Date nuevaFecha = Utilidades.pedirFecha("Fecha límite:");
 		return nuevaFecha;
 	}
@@ -124,7 +127,5 @@ public class CRUDArray {
 
 	}
 
-	private static void anadirTarea() {
-
-	}
+	
 }
