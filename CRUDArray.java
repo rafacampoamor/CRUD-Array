@@ -16,7 +16,7 @@ public class CRUDArray {
 		int longitud = titulo.length;
 		char sino = 'n';
 		boolean ListaVacia = true;
-	
+		boolean lleno = false;
 
 		do {
 			selector = menu();
@@ -25,7 +25,7 @@ public class CRUDArray {
 				// Aqui se listan todas las tareas
 				System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
 				contador = 0;
-				while (contador < longitud) {
+				while (contador < titulo.length) {
 					if (titulo[contador] != null) {
 						ListaVacia = false;
 						System.out.println(contador + ". " + titulo[contador] + " -- " + descripcion[contador] + " -- "
@@ -44,7 +44,7 @@ public class CRUDArray {
 								encontrado = true;
 							}
 							contador++;
-						} while (contador < longitud && !encontrado);
+						} while (contador < titulo.length && !encontrado);
 						if (encontrado) {
 							nuevoTitulo = anadirTitulo();
 							titulo[contador] = nuevoTitulo;
@@ -65,17 +65,21 @@ public class CRUDArray {
 			}
 			case 2: {
 				contador = 0;
+				lleno = false;
 				do {
 					if (titulo[contador] == null) {
 						encontrado = true;
 					} else {
 						contador++;
 						if (contador == titulo.length) {
-							errorLleno();
+							lleno = true;
+							System.out.println(
+									"\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
+							break;
 						}
 					}
-				} while (contador < longitud && !encontrado);
-				if (encontrado) {
+				} while (contador < titulo.length && !encontrado);
+				if (encontrado && !lleno) {
 					nuevoTitulo = anadirTitulo();
 					titulo[contador] = nuevoTitulo;
 					nuevaDescripcion = anadirDescripcion();
@@ -83,6 +87,8 @@ public class CRUDArray {
 					nuevaFecha = anadirFecha();
 					fechaLimite[contador] = nuevaFecha;
 					System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+				} else if (lleno) {
+					System.out.println("\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\\n");
 				}
 				break;
 			}
@@ -127,5 +133,4 @@ public class CRUDArray {
 
 	}
 
-	
 }
