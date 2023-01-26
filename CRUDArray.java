@@ -6,10 +6,11 @@ public class CRUDArray {
 		// TODO Auto-generated method stub
 		int selector = 0;
 		int contador = -1;
+		int posiciones = 2;
 		boolean encontrado = false;
-		String[] titulo = new String[2];
-		String[] descripcion = new String[2];
-		Date[] fechaLimite = new Date[2];
+		String[] titulo = new String[posiciones];
+		String[] descripcion = new String[posiciones];
+		Date[] fechaLimite = new Date[posiciones];
 		String nuevoTitulo = new String();
 		String nuevaDescripcion = new String();
 		Date nuevaFecha = null;
@@ -25,7 +26,7 @@ public class CRUDArray {
 				// Aqui se listan todas las tareas
 				System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
 				contador = 0;
-				while (contador < titulo.length) {
+				while (contador < posiciones) {
 					if (titulo[contador] != null) {
 						ListaVacia = false;
 						System.out.println(contador + ". " + titulo[contador] + " -- " + descripcion[contador] + " -- "
@@ -38,47 +39,37 @@ public class CRUDArray {
 					System.out.println("La lista está vacía");
 					sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
 					if (sino == 's') {
-						contador = 0;
-						do {
-							if (titulo[contador] == null) {
-								encontrado = true;
-							}
-							contador++;
-						} while (contador < titulo.length && !encontrado);
-						if (encontrado) {
-							nuevoTitulo = anadirTitulo();
-							titulo[contador] = nuevoTitulo;
-							nuevaDescripcion = anadirDescripcion();
-							descripcion[contador] = nuevaDescripcion;
-							nuevaFecha = anadirFecha();
-							fechaLimite[contador] = nuevaFecha;
-							System.out.println(
-									titulo[contador] + " ha sido añadido para el " + fechaLimite[contador] + "\n");
-						} else {
-							errorLleno();
-						}
 
+						nuevoTitulo = anadirTitulo();
+						titulo[contador] = nuevoTitulo;
+						nuevaDescripcion = anadirDescripcion();
+						descripcion[contador] = nuevaDescripcion;
+						nuevaFecha = anadirFecha();
+						fechaLimite[contador] = nuevaFecha;
+						System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
 					}
-					break;
+
 				}
 				break;
 			}
+
 			case 2: {
 				contador = 0;
 				lleno = false;
+				encontrado = false;
 				do {
 					if (titulo[contador] == null) {
 						encontrado = true;
 					} else {
 						contador++;
-						if (contador == titulo.length) {
+						if (contador == posiciones) {
 							lleno = true;
-							System.out.println(
-									"\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
+							System.out.println("\n\n     ERROR\nLa memoria está llena\n" + posiciones
+									+ " tareas han sido añadidas.\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
 							break;
 						}
 					}
-				} while (contador < titulo.length && !encontrado);
+				} while (contador < posiciones && !encontrado);
 				if (encontrado && !lleno) {
 					nuevoTitulo = anadirTitulo();
 					titulo[contador] = nuevoTitulo;
@@ -88,7 +79,8 @@ public class CRUDArray {
 					fechaLimite[contador] = nuevaFecha;
 					System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
 				} else if (lleno) {
-					System.out.println("\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\\n");
+					System.out.println("\n\n     ERROR\nLa memoria está llena\n" + posiciones
+							+ " tareas han sido añadidas.\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
 				}
 				break;
 			}
