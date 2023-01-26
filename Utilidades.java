@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -33,6 +35,13 @@ public class Utilidades {
 		System.out.println(texto);
 		cadena = lector.nextLine();
 		return cadena;
+	}
+	public static char PedirChar(String texto) {
+		char caracter;
+		Scanner lector = new Scanner(System.in);
+		System.out.println(texto);
+		caracter = lector.next().charAt(0);
+		return caracter;
 	}
 
 	public static Date pedirFecha(String texto) {

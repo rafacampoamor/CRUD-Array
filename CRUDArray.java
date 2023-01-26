@@ -1,5 +1,6 @@
 import java.util.Date;
 
+
 public class CRUDArray {
 
 	public static void main(String[] args) {
@@ -12,75 +13,108 @@ public class CRUDArray {
 		Date[] fechaLimite = new Date[20];
 		String nuevoTitulo = new String();
 		String nuevaDescripcion = new String();
-		Date nuevaFecha=null;
+		Date nuevaFecha = null;
+		int longitud = titulo.length;
+		char sino = 'n';
 
+		System.out.println("====EVIL CORP====\n   TAREAS 0.1    \n-----------------");
 		do {
 			selector = menu();
 			switch (selector) {
 			case 1: {
-				nuevoTitulo= anadirTitulo();
-				contador = -1;
+			// Aqui se listan todas las tareas
+				System.out.println("\n\\n     LISTA DE\\n     TAREAS\n-----------------\n\\n");
+				contador=0;
+				do {
+					System.out.println(contador +". " + titulo[contador] + " -- " + fechaLimite[contador]);
+				} while (contador<=longitud && titulo[contador]!=null);
+					System.out.println("La lista está vacía");
+					sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
+					switch (sino) {
+					case 's': {
+						nuevoTitulo = anadirTitulo();
+						contador = 0;
+						do {
+							if (titulo[contador] == null) {
+								titulo[contador] = nuevoTitulo;
+								encontrado = true;
+							} else {
+								errorLleno();
+							}
+
+						} while (contador < titulo.length && !encontrado);
+						nuevaDescripcion = anadirDescripcion();
+						descripcion[contador] = nuevaDescripcion;
+
+						nuevaFecha = anadirFecha();
+						fechaLimite[contador] = nuevaFecha;
+					System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+					
+					}
+					default:
+						menu();
+					}
+			}
+			case 2: {
+				nuevoTitulo = anadirTitulo();
+				contador = 0;
 				do {
 					if (titulo[contador] == null) {
 						titulo[contador] = nuevoTitulo;
 						encontrado = true;
+					} else {
+						errorLleno();
 					}
 
 				} while (contador < titulo.length && !encontrado);
-				nuevaDescripcion= anadirDescripcion();
-				contador = -1;
-				do {
-					if (descripcion[contador] == null) {
-						descripcion[contador] = nuevaDescripcion;
-						encontrado = true;
-					}
+				nuevaDescripcion = anadirDescripcion();
+				descripcion[contador] = nuevaDescripcion;
 
-				} while (contador < titulo.length && !encontrado);
-			nuevaFecha= anadirFecha();
-			do {
-				if (fechaLimite[contador] == null) {
-					fechaLimite[contador] = nuevaFecha;
-					encontrado = true;
-				}
-
-			} while (contador < titulo.length && !encontrado);
+				nuevaFecha = anadirFecha();
+				fechaLimite[contador] = nuevaFecha;
+			System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
 			}
 			default:
 
 			}
-		} while (selector != 5);
+		} while (selector != 6);
 
 	}
 
 	private static int menu() {
 
 		int selector = Utilidades.pedirInt(
-				"====EVIL CORP====\n   TAREAS 0.1    \n-----------------\n1. Añadir Tarea\n2. Modificar Tarea\n3. Eliminar Tarea\n4. Buscar Tarea\n5. Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
+				"1. Lista Tareas\n2. Añadir Tarea\n3. Modificar Tarea\n4. Eliminar Tarea\n5. Buscar Tarea\n6. Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
 		return selector;
 	}
 
 	private static String anadirTitulo() {
-		System.out.println("====EVIL CORP====\n\n     AÑADIR\n     TAREA\n-----------------\n\n");
+		System.out.println(""
+				+ "\n\n     AÑADIR\n     TAREA\n-----------------\n\n");
 		String nuevoTitulo = Utilidades.PedirString("Titulo de la tarea:");
-		
 
 		return nuevoTitulo;
 	}
 
 	private static String anadirDescripcion() {
-		System.out.println("====EVIL CORP====\n\n     AÑADIR\n     DESCRIPCIÓN\n-----------------\n\n");
+		System.out.println("\n\n     AÑADIR\n     DESCRIPCIÓN\n-----------------\n\n");
 		String nuevaDescripcion = Utilidades.PedirString("Descripción de la tarea");
 
 		return nuevaDescripcion;
 	}
+
 	private static Date anadirFecha() {
-		System.out.println("====EVIL CORP====\n\n     AÑADIR\n     FECHA\n-----------------\n\n");
+		System.out.println("\n\n     AÑADIR\n     FECHA\n-----------------\n\n");
 		Date nuevaFecha = Utilidades.pedirFecha("Fecha límite:");
 		return nuevaFecha;
 	}
-	private void anadirTarea() {
-		
-		
-	}
 
+	private static void errorLleno() {
+		System.out.println(
+				"\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
+	
+	}
+private static void anadirTarea() {
+	
+}
 }
