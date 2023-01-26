@@ -1,6 +1,5 @@
 import java.util.Date;
 
-
 public class CRUDArray {
 
 	public static void main(String[] args) {
@@ -22,12 +21,14 @@ public class CRUDArray {
 			selector = menu();
 			switch (selector) {
 			case 1: {
-			// Aqui se listan todas las tareas
-				System.out.println("\n\\n     LISTA DE\\n     TAREAS\n-----------------\n\\n");
-				contador=0;
-				do {
-					System.out.println(contador +". " + titulo[contador] + " -- " + fechaLimite[contador]);
-				} while (contador<=longitud && titulo[contador]!=null);
+				// Aqui se listan todas las tareas
+				System.out.println("\n\n     LISTA DE\n     TAREAS\n-----------------\n\n");
+				contador = 0;
+				if (titulo[0] != null) {
+					do {
+						System.out.println(contador + ". " + titulo[contador] + " -- " + fechaLimite[contador]);
+					} while (contador <= longitud && titulo[contador] != null);
+				} else {
 					System.out.println("La lista está vacía");
 					sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
 					switch (sino) {
@@ -48,12 +49,17 @@ public class CRUDArray {
 
 						nuevaFecha = anadirFecha();
 						fechaLimite[contador] = nuevaFecha;
-					System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
-					
+						System.out
+								.println("\n" + titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+						break;
+						
+						// Aquí vuelve a pedir otra tarea y no debería: PURGAR
 					}
 					default:
-						menu();
+						break;
 					}
+				}
+
 			}
 			case 2: {
 				nuevoTitulo = anadirTitulo();
@@ -72,7 +78,8 @@ public class CRUDArray {
 
 				nuevaFecha = anadirFecha();
 				fechaLimite[contador] = nuevaFecha;
-			System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+				System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+				break;
 			}
 			default:
 
@@ -89,8 +96,7 @@ public class CRUDArray {
 	}
 
 	private static String anadirTitulo() {
-		System.out.println(""
-				+ "\n\n     AÑADIR\n     TAREA\n-----------------\n\n");
+		System.out.println("" + "\n\n     AÑADIR\n     TAREA\n-----------------\n\n");
 		String nuevoTitulo = Utilidades.PedirString("Titulo de la tarea:");
 
 		return nuevoTitulo;
@@ -110,11 +116,12 @@ public class CRUDArray {
 	}
 
 	private static void errorLleno() {
-		System.out.println(
-				"\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
-	
+		System.out
+				.println("\n\n     ERROR\nLa memoria está llena\n\n¿Quieres borrar algo? (S/N)\n-----------------\n\n");
+
 	}
-private static void anadirTarea() {
-	
-}
+
+	private static void anadirTarea() {
+
+	}
 }
