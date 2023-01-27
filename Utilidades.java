@@ -36,6 +36,14 @@ public class Utilidades {
 		cadena = lector.nextLine();
 		return cadena;
 	}
+
+	/**
+	 * 
+	 * Pedir un caracter al usuario.
+	 * 
+	 * @param texto Texto a mostrar al usuario antes de pedir el caracter.
+	 * @return El caracter introducido por el usuario.
+	 */
 	public static char PedirChar(String texto) {
 		char caracter;
 		Scanner lector = new Scanner(System.in);
@@ -44,6 +52,14 @@ public class Utilidades {
 		return caracter;
 	}
 
+	/**
+	 * 
+	 * Pedir una fecha al usuario y devolverla en formato Date
+	 * 
+	 * @param texto El texto a mostrar al usuario para pedir la fecha
+	 * @return fecha La fecha introducida por el usuario en formato Date. Si la
+	 *         fecha introducida no es válida, devuelve null.
+	 */
 	public static Date pedirFecha(String texto) {
 		Date fecha = null;
 		Scanner lector = new Scanner(System.in);
@@ -59,7 +75,19 @@ public class Utilidades {
 	}
 
 	/**
-	 * Método que permite determinar si una cadena de caracteres contiene únicamente
+	 * 
+	 * Generar una pausa en la ejecución del programa y esperar a que el
+	 * usuario presione cualquier tecla para continuar. Utiliza un objeto Scanner
+	 * para leer la entrada del usuario.
+	 */
+	public static void pausa() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("\nPresiona ENTER para continuar...");
+		scan.nextLine();
+	}
+
+	/**
+	 * Permite determinar si una cadena de caracteres contiene únicamente
 	 * números.
 	 * 
 	 * @param cadena Cadena de caracteres a evaluar.
