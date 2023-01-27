@@ -12,11 +12,17 @@ public class Utilidades {
 	 */
 
 	public static int pedirInt(String texto) {
-		int numero;
+		int numero = 0;
+		boolean valido = false;
+
 		Scanner lector = new Scanner(System.in);
+
 		System.out.println(texto);
+		while (!lector.hasNextInt()) {
+			System.out.println("Por favor ingresa un número entero válido.");
+			lector.nextLine();
+		}
 		numero = lector.nextInt();
-		lector.nextLine();
 		return numero;
 	}
 
@@ -33,6 +39,10 @@ public class Utilidades {
 		String cadena;
 		Scanner lector = new Scanner(System.in);
 		System.out.println(texto);
+		while (!lector.hasNextLine()) {
+			System.out.println("Por favor, ingrese un valor válido");
+			lector.next();
+		}
 		cadena = lector.nextLine();
 		return cadena;
 	}
@@ -76,9 +86,9 @@ public class Utilidades {
 
 	/**
 	 * 
-	 * Generar una pausa en la ejecución del programa y esperar a que el
-	 * usuario presione cualquier tecla para continuar. Utiliza un objeto Scanner
-	 * para leer la entrada del usuario.
+	 * Generar una pausa en la ejecución del programa y esperar a que el usuario
+	 * presione cualquier tecla para continuar. Utiliza un objeto Scanner para leer
+	 * la entrada del usuario.
 	 */
 	public static void pausa() {
 		Scanner scan = new Scanner(System.in);
@@ -87,8 +97,7 @@ public class Utilidades {
 	}
 
 	/**
-	 * Permite determinar si una cadena de caracteres contiene únicamente
-	 * números.
+	 * Permite determinar si una cadena de caracteres contiene únicamente números.
 	 * 
 	 * @param cadena Cadena de caracteres a evaluar.
 	 * @return Verdadero si la cadena contiene únicamente números, falso en caso
