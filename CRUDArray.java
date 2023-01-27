@@ -5,7 +5,6 @@ public class CRUDArray extends Tarea {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int selector = 0;
-		boolean ListaVacia = true;
 		Tarea unaTarea = new Tarea();
 
 		do {
@@ -15,8 +14,6 @@ public class CRUDArray extends Tarea {
 
 				// Aqui se listan todas las tareas y se añade una si el Array está vacío
 				listarTareas(unaTarea);
-			
-
 				break;
 			}
 			case 2: {
@@ -33,7 +30,6 @@ public class CRUDArray extends Tarea {
 			}
 			case 5: {
 				buscarTarea(unaTarea);
-
 				break;
 			}
 
