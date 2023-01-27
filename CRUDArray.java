@@ -1,5 +1,6 @@
 import java.util.Date;
 
+
 public class CRUDArray {
 
 	public static void main(String[] args) {
@@ -14,7 +15,6 @@ public class CRUDArray {
 		String nuevoTitulo = new String();
 		String nuevaDescripcion = new String();
 		Date nuevaFecha = null;
-		int longitud = titulo.length;
 		char sino = 'n';
 		boolean ListaVacia = true;
 		boolean lleno = false;
@@ -48,7 +48,8 @@ public class CRUDArray {
 						descripcion[contador] = nuevaDescripcion;
 						nuevaFecha = anadirFecha();
 						fechaLimite[contador] = nuevaFecha;
-						System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+						System.out
+								.println("\n" + titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
 					}
 
 				} else {
@@ -68,8 +69,9 @@ public class CRUDArray {
 								descripcion[contador] = nuevaDescripcion;
 								nuevaFecha = anadirFecha();
 								fechaLimite[contador] = nuevaFecha;
-								System.out.println(
-										titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+								System.out.println("\n" + titulo[contador] + " ha sido modificado para el "
+										+ fechaLimite[contador]);
+								
 							}
 						} else if (!esnumero) {
 							contador = buscarPosicionNombre(titulo, busqueda);
@@ -80,39 +82,57 @@ public class CRUDArray {
 							descripcion[contador] = nuevaDescripcion;
 							nuevaFecha = anadirFecha();
 							fechaLimite[contador] = nuevaFecha;
-							System.out
-									.println(titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+							System.out.println(
+									"\n" + titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+							
 						} else {
-							System.out.println("Lo siento, no encuentro lo que buscas");
+							System.out.println("\nLo siento, no encuentro lo que buscas");
 						}
+						Utilidades.pausa();
+						break;
 					}
 					case 2: {
-						busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
+						busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
 						esnumero = Utilidades.sonNumeros(busqueda);
 						if (esnumero) {
 							contador = Integer.parseInt(busqueda);
 							if (contador < posiciones) {
-								sino = Utilidades.PedirChar("Seguro que quieres borrar " + titulo[contador] + " del " + fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+								sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
+										+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
 								if (sino == 's') {
 
-									nuevoTitulo = null;
-									titulo[contador] = nuevoTitulo;
-									nuevaDescripcion = null;
-									descripcion[contador] = nuevaDescripcion;
-									nuevaFecha = null;
-									fechaLimite[contador] = nuevaFecha;
-									System.out.println("Tarea borrada con éxito");
-								}else {
-									break;
+									titulo[contador] = null;
+									descripcion[contador] = null;
+									fechaLimite[contador] = null;
+									System.out.println("\nTarea borrada con éxito");
+								} else {
+
 								}
 							}
+						} else if (!esnumero) {
+							contador = buscarPosicionNombre(titulo, busqueda);
+							sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
+									+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+							if (sino == 's') {
+
+								titulo[contador] = null;
+								descripcion[contador] = null;
+								fechaLimite[contador] = null;
+								System.out.println("\nTarea borrada con éxito");
+
+							} else {
+
+							}
+							Utilidades.pausa();
+							break;
 						}
+
 					}
 					default:
 						break;
 					}
 				}
-				Utilidades.pausa();
+				
 				break;
 			}
 
@@ -139,7 +159,7 @@ public class CRUDArray {
 					descripcion[contador] = nuevaDescripcion;
 					nuevaFecha = anadirFecha();
 					fechaLimite[contador] = nuevaFecha;
-					System.out.println(titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
+					System.out.println("\n" + titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
 					Utilidades.pausa();
 				} else if (lleno) {
 					errorLleno(posiciones);
@@ -163,6 +183,7 @@ public class CRUDArray {
 					}
 				} else if (!esnumero) {
 					contador = buscarPosicionNombre(titulo, busqueda);
+					if (contador >= 0 && contador < posiciones) {
 					System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
 					nuevoTitulo = anadirTitulo();
 					titulo[contador] = nuevoTitulo;
@@ -170,14 +191,67 @@ public class CRUDArray {
 					descripcion[contador] = nuevaDescripcion;
 					nuevaFecha = anadirFecha();
 					fechaLimite[contador] = nuevaFecha;
-					System.out.println(titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
-				} else {
+					System.out
+							.println("\n" + titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+				
+					}else {
+						System.out.println("Lo siento, no encuentro lo que buscas");
+					}
+					} else {
 					System.out.println("Lo siento, no encuentro lo que buscas");
 				}
 			}
+			case 4: {
+				busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
+				esnumero = Utilidades.sonNumeros(busqueda);
+				if (esnumero) {
+					contador = Integer.parseInt(busqueda);
+					if (contador < posiciones) {
+						sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
+								+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+						if (sino == 's') {
+
+							titulo[contador] = null;
+							descripcion[contador] = null;
+							fechaLimite[contador] = null;
+							System.out.println("\nTarea borrada con éxito");
+						} else {
+
+						}
+						break;
+					}
+				} else if (!esnumero) {
+					contador = buscarPosicionNombre(titulo, busqueda);
+					sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
+							+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+					if (sino == 's') {
+
+						titulo[contador] = null;
+						descripcion[contador] = null;
+						fechaLimite[contador] = null;
+						System.out.println("\nTarea borrada con éxito");
+
+					} else {
+
+					}
+					break;
+				}
+
+			}
+			case 5: {
+				busqueda = Utilidades.PedirString("\nBuscar Tarea:");
+				contador = buscarPosicionNombre(titulo, busqueda);
+				if (contador >= 0 && contador < posiciones) {
+					System.out.println(
+							titulo[contador] + " -- " + descripcion[contador] + " -- " + fechaLimite[contador]);
+					
+				}
+				Utilidades.pausa();
+				break;
+			}
 
 			default:
-
+				break;
 			}
 		} while (selector != 6);
 
@@ -208,7 +282,7 @@ public class CRUDArray {
 	private static int submenu() {
 
 		int selector = Utilidades.pedirInt(
-				"\n¿Qué quieres hacer?\n1. Modificar una tarea\n2. Borrar una tarea\n3. Atrás\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
+				"\n¿Qué quieres hacer?\n\n1. Modificar una tarea\n2. Borrar una tarea\n3. Atrás\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
 		return selector;
 	}
 
