@@ -1,285 +1,53 @@
 import java.util.Date;
 
-public class CRUDArray {
+public class CRUDArray extends Tarea {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int selector = 0;
-		int contador = -1;
-		int posiciones = 3;
-		boolean encontrado = false;
-		String[] titulo = new String[posiciones];
-		String[] descripcion = new String[posiciones];
-		Date[] fechaLimite = new Date[posiciones];
-		String nuevoTitulo = new String();
-		String nuevaDescripcion = new String();
-		Date nuevaFecha = null;
-		char sino = 'n';
-		boolean ListaVacia = true;
-		boolean lleno = false;
-		String busqueda = new String();
-		boolean esnumero = false;
+		
+		Tarea nuevaTarea = new Tarea();
 
 		do {
 			selector = menu();
 			switch (selector) {
 			case 1: {
-				// Aqui se listan todas las tareas
-				System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
-				contador = 0;
-				ListaVacia = true;
-				while (contador < posiciones && titulo[0] != null) {
-					if (titulo[contador] != null) {
-						ListaVacia = false;
-						System.out.println(contador + ". " + titulo[contador] + " -- " + descripcion[contador] + " -- "
-								+ fechaLimite[contador]);
-					}
-					contador++;
+
+				// Aqui se listan todas las tareas y se añade una si el Array está vacío
+				listarTareas(nuevaTarea);
+				// aqui va un switch para modificar o borrar
+				selector = submenu();
+				switch (selector) {
+				case 1: {
+					modificarTarea(nuevaTarea);
+					break;
 				}
-				if (ListaVacia) {
-					// si no hay tareas, se añade una
-					System.out.println("La lista está vacía");
-					sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
-					if (sino == 's') {
-
-						nuevoTitulo = anadirTitulo();
-						titulo[contador] = nuevoTitulo;
-						nuevaDescripcion = anadirDescripcion();
-						descripcion[contador] = nuevaDescripcion;
-						nuevaFecha = anadirFecha();
-						fechaLimite[contador] = nuevaFecha;
-						System.out
-								.println("\n" + titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
-					}
-
-				} else {
-					// aqui va un switch para modificar o borrar
-					selector = submenu();
-					switch (selector) {
-					case 1: {
-						busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
-						esnumero = Utilidades.sonNumeros(busqueda);
-						if (esnumero) {
-							contador = Integer.parseInt(busqueda);
-							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-								System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
-								nuevoTitulo = anadirTitulo();
-								titulo[contador] = nuevoTitulo;
-								nuevaDescripcion = anadirDescripcion();
-								descripcion[contador] = nuevaDescripcion;
-								nuevaFecha = anadirFecha();
-								fechaLimite[contador] = nuevaFecha;
-								System.out.println(
-										titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
-							} else {
-								System.out.println("Lo siento, no encuentro lo que quieres modificar");
-								Utilidades.pausa();
-								break;
-							}
-						} else if (!esnumero) {
-							contador = buscarPosicionNombre(titulo, busqueda);
-							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-								System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
-								nuevoTitulo = anadirTitulo();
-								titulo[contador] = nuevoTitulo;
-								nuevaDescripcion = anadirDescripcion();
-								descripcion[contador] = nuevaDescripcion;
-								nuevaFecha = anadirFecha();
-								fechaLimite[contador] = nuevaFecha;
-								System.out.println("\n" + titulo[contador] + " ha sido modificado para el "
-										+ fechaLimite[contador]);
-
-							} else {
-								System.out.println("No encuentro lo que quieres modificar");
-								Utilidades.pausa();
-								break;
-							}
-						}
-						Utilidades.pausa();
-						break;
-					}
-					case 2: {
-						busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
-						esnumero = Utilidades.sonNumeros(busqueda);
-						if (esnumero) {
-							contador = Integer.parseInt(busqueda);
-							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-								sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
-										+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
-								if (sino == 's') {
-
-									titulo[contador] = null;
-									descripcion[contador] = null;
-									fechaLimite[contador] = null;
-									System.out.println("\nTarea borrada con éxito");
-								} else {
-
-								}
-								Utilidades.pausa();
-								break;
-							} else {
-								System.out.println("No encuentro lo que quieres borrar");
-								Utilidades.pausa();
-								break;
-							}
-						} else if (!esnumero) {
-							contador = buscarPosicionNombre(titulo, busqueda);
-							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-								sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
-										+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
-								if (sino == 's') {
-
-									titulo[contador] = null;
-									descripcion[contador] = null;
-									fechaLimite[contador] = null;
-									System.out.println("\nTarea borrada con éxito");
-									Utilidades.pausa();
-
-								} else {
-									Utilidades.pausa();
-									break;
-								}
-							} else {
-								Utilidades.pausa();
-								break;
-							}
-						}
-
-					}
-					default:
-						break;
-					}
+				case 2: {
+					borrarTarea(nuevaTarea);
+					break;
 				}
 
-				break;
+				default:
+					break;
+				}
+
 			}
 
 			case 2: {
-				contador = 0;
-				lleno = false;
-				encontrado = false;
-				do {
-					if (titulo[contador] == null) {
-						encontrado = true;
-					} else {
-						contador++;
-						if (contador == posiciones) {
-							lleno = true;
-							errorLleno(posiciones);
-							break;
-						}
-					}
-				} while (contador < posiciones && !encontrado);
-				if (encontrado && !lleno) {
-					nuevoTitulo = anadirTitulo();
-					titulo[contador] = nuevoTitulo;
-					nuevaDescripcion = anadirDescripcion();
-					descripcion[contador] = nuevaDescripcion;
-					nuevaFecha = anadirFecha();
-					fechaLimite[contador] = nuevaFecha;
-					System.out.println("\n" + titulo[contador] + " ha sido añadido para el " + fechaLimite[contador]);
-					Utilidades.pausa();
-				} else if (lleno) {
-					errorLleno(posiciones);
-				}
+				crearTarea(nuevaTarea);
 				break;
 			}
 			case 3: {
-				busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
-				esnumero = Utilidades.sonNumeros(busqueda);
-				if (esnumero) {
-					contador = Integer.parseInt(busqueda);
-					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-						System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
-						nuevoTitulo = anadirTitulo();
-						titulo[contador] = nuevoTitulo;
-						nuevaDescripcion = anadirDescripcion();
-						descripcion[contador] = nuevaDescripcion;
-						nuevaFecha = anadirFecha();
-						fechaLimite[contador] = nuevaFecha;
-						System.out.println(titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
-					} else {
-						System.out.println("Lo siento, no encuentro lo que quieres modificar");
-						Utilidades.pausa();
-						break;
-					}
-				} else if (!esnumero) {
-					contador = buscarPosicionNombre(titulo, busqueda);
-					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-						System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
-						nuevoTitulo = anadirTitulo();
-						titulo[contador] = nuevoTitulo;
-						nuevaDescripcion = anadirDescripcion();
-						descripcion[contador] = nuevaDescripcion;
-						nuevaFecha = anadirFecha();
-						fechaLimite[contador] = nuevaFecha;
-						System.out.println(
-								"\n" + titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
-
-					} else {
-						System.out.println("No encuentro lo que quieres modificar");
-						Utilidades.pausa();
-						break;
-					}
-				}
+				modificarTarea(nuevaTarea);
+				break;
 			}
 			case 4: {
-				busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
-				esnumero = Utilidades.sonNumeros(busqueda);
-				if (esnumero) {
-					contador = Integer.parseInt(busqueda);
-					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-						sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
-								+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
-						if (sino == 's') {
-
-							titulo[contador] = null;
-							descripcion[contador] = null;
-							fechaLimite[contador] = null;
-							System.out.println("\nTarea borrada con éxito");
-						} else {
-
-						}
-						Utilidades.pausa();
-						break;
-					} else {
-						System.out.println("No encuentro lo que quieres borrar");
-						Utilidades.pausa();
-						break;
-					}
-				} else if (!esnumero) {
-					contador = buscarPosicionNombre(titulo, busqueda);
-					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
-						sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
-								+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
-						if (sino == 's') {
-
-							titulo[contador] = null;
-							descripcion[contador] = null;
-							fechaLimite[contador] = null;
-							System.out.println("\nTarea borrada con éxito");
-							Utilidades.pausa();
-
-						} else {
-							Utilidades.pausa();
-							break;
-						}
-					} else {
-						Utilidades.pausa();
-						break;
-					}
-				}
-
+				borrarTarea(nuevaTarea);
+				break;
 			}
 			case 5: {
-				busqueda = Utilidades.PedirString("\nBuscar Tarea:");
-				contador = buscarPosicionNombre(titulo, busqueda);
-				if (contador >= 0 && contador < posiciones) {
-					System.out.println(
-							titulo[contador] + " -- " + descripcion[contador] + " -- " + fechaLimite[contador]);
-
-				}
-				Utilidades.pausa();
+				buscarTarea(nuevaTarea);
+				
 				break;
 			}
 
@@ -288,6 +56,178 @@ public class CRUDArray {
 			}
 		} while (selector != 6);
 
+	}
+
+	private static void buscarTarea(Tarea nuevaTarea) {
+		// TODO Auto-generated method stub
+	
+		
+		String busqueda = Utilidades.PedirString("\nBuscar Tarea:");
+		int contador = buscarPosicionNombre(nuevaTarea.getTitulo(), busqueda);
+		if (contador >= 0 && contador < nuevaTarea.getPosiciones()) {
+			System.out.println(
+					nuevaTarea.getTitulo()[contador] + " -- " + nuevaTarea.getDescripcion()[contador] + " -- " + nuevaTarea.getFechaLimite()[contador]);
+		}
+		Utilidades.pausa();
+	}
+
+	private static void borrarTarea(Tarea nuevaTarea) {
+		// TODO Auto-generated method stub
+		int contador = 0;
+		boolean esnumero = false;
+		char sino = 'n';
+
+		String busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
+		esnumero = Utilidades.sonNumeros(busqueda);
+		if (esnumero) {
+			contador = Integer.parseInt(busqueda);
+			if (contador >= 0 && contador < nuevaTarea.getPosiciones() && nuevaTarea.getTitulo()[contador] != null) {
+				sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + nuevaTarea.getTitulo()[contador] + " del "
+						+ nuevaTarea.getFechaLimite()[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+				if (sino == 's') {
+
+					nuevaTarea.getTitulo()[contador] = null;
+					nuevaTarea.getDescripcion()[contador] = null;
+					nuevaTarea.getFechaLimite()[contador] = null;
+					System.out.println("\nTarea borrada con éxito");
+				} else {
+
+				}
+				Utilidades.pausa();
+			} else {
+				System.out.println("No encuentro lo que quieres borrar");
+				Utilidades.pausa();
+			}
+		} else if (!esnumero) {
+			contador = buscarPosicionNombre(nuevaTarea.getTitulo(), busqueda);
+			if (contador >= 0 && contador < nuevaTarea.getPosiciones() && nuevaTarea.getTitulo()[contador] != null) {
+				System.out.println("Modificando " + nuevaTarea.getTitulo()[contador] + " del "
+						+ nuevaTarea.getFechaLimite()[contador]);
+
+				nuevaTarea.getTitulo()[contador] = anadirTitulo();
+				nuevaTarea.getDescripcion()[contador] = anadirDescripcion();
+				nuevaTarea.getFechaLimite()[contador] = anadirFecha();
+				System.out.println("\n" + nuevaTarea.getTitulo()[contador] + " ha sido modificado para el "
+						+ nuevaTarea.getFechaLimite()[contador]);
+
+			} else {
+				System.out.println("No encuentro lo que quieres modificar");
+				Utilidades.pausa();
+			}
+		} else if (!esnumero) {
+			contador = buscarPosicionNombre(nuevaTarea.getTitulo(), busqueda);
+			if (contador >= 0 && contador < nuevaTarea.getPosiciones() && nuevaTarea.getTitulo()[contador] != null) {
+				sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + nuevaTarea.getTitulo()[contador] + " del "
+						+ nuevaTarea.getFechaLimite()[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+				if (sino == 's') {
+
+					nuevaTarea.getTitulo()[contador] = null;
+					nuevaTarea.getDescripcion()[contador] = null;
+					nuevaTarea.getFechaLimite()[contador] = null;
+					System.out.println("\nTarea borrada con éxito");
+					Utilidades.pausa();
+
+				} else {
+					Utilidades.pausa();
+				}
+			} else {
+				Utilidades.pausa();
+			}
+		}
+	}
+
+	private static void modificarTarea(Tarea nuevaTarea) {
+		// TODO Auto-generated method stub
+		int contador = 0;
+
+		String busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
+		boolean esnumero = Utilidades.sonNumeros(busqueda);
+		if (esnumero) {
+			contador = Integer.parseInt(busqueda);
+			if (contador >= 0 && contador < nuevaTarea.getPosiciones() && nuevaTarea.getTitulo()[contador] != null) {
+				System.out.println("Modificando " + nuevaTarea.getTitulo()[contador] + " del "
+						+ nuevaTarea.getFechaLimite()[contador]);
+
+				nuevaTarea.getTitulo()[contador] = anadirTitulo();
+				nuevaTarea.getDescripcion()[contador] = anadirDescripcion();
+				nuevaTarea.getFechaLimite()[contador] = anadirFecha();
+				System.out.println(nuevaTarea.getTitulo()[contador] + " ha sido modificado para el "
+						+ nuevaTarea.getFechaLimite()[contador]);
+			} else {
+				System.out.println("Lo siento, no encuentro lo que quieres modificar");
+				Utilidades.pausa();
+
+			}
+		}
+	}
+
+	private static void listarTareas(Tarea nuevaTarea) {
+		// TODO Auto-generated method stub
+		// Aqui se listan todas las tareas
+		System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
+		int contador = 0;
+		boolean ListaVacia = true;
+		char sino = 'n';
+		while (contador < nuevaTarea.getPosiciones() && nuevaTarea.getTitulo()[0] != null) {
+			if (nuevaTarea.getTitulo()[contador] != null) {
+				ListaVacia = false;
+				System.out.println(contador + ". " + nuevaTarea.getTitulo()[contador] + " -- "
+						+ nuevaTarea.getDescripcion()[contador] + " -- " + nuevaTarea.getFechaLimite()[contador]);
+			}
+			contador++;
+		}
+		if (ListaVacia) {
+			// si no hay tareas, se añade una
+			System.out.println("La lista está vacía");
+			sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
+			if (sino == 's') {
+				crearTarea(nuevaTarea);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * El método 'crearTarea' se encarga de crear una nueva tarea en el array de
+	 * tareas. Si el array está lleno, se mostrará un mensaje de error. Si el array
+	 * no está lleno, se pedirá al usuario que ingrese el título, descripción y
+	 * fecha límite de la tarea.
+	 * 
+	 * @param nuevaTarea es la tarea que se va a crear
+	 */
+	private static void crearTarea(Tarea nuevaTarea) {
+		int contador = 0;
+		boolean lleno = false;
+		boolean encontrado = false;
+		String titulo, descripcion;
+		Date fechaLimite;
+
+		do {
+			if (nuevaTarea.getTitulo()[contador] == null) {
+				encontrado = true;
+			} else {
+				contador++;
+				if (contador == nuevaTarea.getTitulo().length) {
+					lleno = true;
+					errorLleno(nuevaTarea.getTitulo().length);
+					break;
+				}
+			}
+		} while (contador < nuevaTarea.getTitulo().length && !encontrado);
+
+		if (encontrado && !lleno) {
+			titulo = anadirTitulo();
+			descripcion = anadirDescripcion();
+			fechaLimite = anadirFecha();
+			nuevaTarea.getTitulo()[contador] = titulo;
+			nuevaTarea.getDescripcion()[contador] = descripcion;
+			nuevaTarea.getFechaLimite()[contador] = fechaLimite;
+			System.out.println("\n" + nuevaTarea.getTitulo()[contador] + " ha sido añadido para el "
+					+ nuevaTarea.getFechaLimite()[contador]);
+			Utilidades.pausa();
+		} else if (lleno) {
+			errorLleno(nuevaTarea.getTitulo().length);
+		}
 	}
 
 	/**
