@@ -1,6 +1,5 @@
 import java.util.Date;
 
-
 public class CRUDArray {
 
 	public static void main(String[] args) {
@@ -28,6 +27,7 @@ public class CRUDArray {
 				// Aqui se listan todas las tareas
 				System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
 				contador = 0;
+				ListaVacia = true;
 				while (contador < posiciones && titulo[0] != null) {
 					if (titulo[contador] != null) {
 						ListaVacia = false;
@@ -61,7 +61,24 @@ public class CRUDArray {
 						esnumero = Utilidades.sonNumeros(busqueda);
 						if (esnumero) {
 							contador = Integer.parseInt(busqueda);
-							if (contador < posiciones) {
+							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
+								System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
+								nuevoTitulo = anadirTitulo();
+								titulo[contador] = nuevoTitulo;
+								nuevaDescripcion = anadirDescripcion();
+								descripcion[contador] = nuevaDescripcion;
+								nuevaFecha = anadirFecha();
+								fechaLimite[contador] = nuevaFecha;
+								System.out.println(
+										titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+							} else {
+								System.out.println("Lo siento, no encuentro lo que quieres modificar");
+								Utilidades.pausa();
+								break;
+							}
+						} else if (!esnumero) {
+							contador = buscarPosicionNombre(titulo, busqueda);
+							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
 								System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
 								nuevoTitulo = anadirTitulo();
 								titulo[contador] = nuevoTitulo;
@@ -71,22 +88,12 @@ public class CRUDArray {
 								fechaLimite[contador] = nuevaFecha;
 								System.out.println("\n" + titulo[contador] + " ha sido modificado para el "
 										+ fechaLimite[contador]);
-								
+
+							} else {
+								System.out.println("No encuentro lo que quieres modificar");
+								Utilidades.pausa();
+								break;
 							}
-						} else if (!esnumero) {
-							contador = buscarPosicionNombre(titulo, busqueda);
-							System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
-							nuevoTitulo = anadirTitulo();
-							titulo[contador] = nuevoTitulo;
-							nuevaDescripcion = anadirDescripcion();
-							descripcion[contador] = nuevaDescripcion;
-							nuevaFecha = anadirFecha();
-							fechaLimite[contador] = nuevaFecha;
-							System.out.println(
-									"\n" + titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
-							
-						} else {
-							System.out.println("\nLo siento, no encuentro lo que buscas");
 						}
 						Utilidades.pausa();
 						break;
@@ -96,7 +103,7 @@ public class CRUDArray {
 						esnumero = Utilidades.sonNumeros(busqueda);
 						if (esnumero) {
 							contador = Integer.parseInt(busqueda);
-							if (contador < posiciones) {
+							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
 								sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
 										+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
 								if (sino == 's') {
@@ -108,23 +115,34 @@ public class CRUDArray {
 								} else {
 
 								}
+								Utilidades.pausa();
+								break;
+							} else {
+								System.out.println("No encuentro lo que quieres borrar");
+								Utilidades.pausa();
+								break;
 							}
 						} else if (!esnumero) {
 							contador = buscarPosicionNombre(titulo, busqueda);
-							sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
-									+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
-							if (sino == 's') {
+							if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
+								sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
+										+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+								if (sino == 's') {
 
-								titulo[contador] = null;
-								descripcion[contador] = null;
-								fechaLimite[contador] = null;
-								System.out.println("\nTarea borrada con éxito");
+									titulo[contador] = null;
+									descripcion[contador] = null;
+									fechaLimite[contador] = null;
+									System.out.println("\nTarea borrada con éxito");
+									Utilidades.pausa();
 
+								} else {
+									Utilidades.pausa();
+									break;
+								}
 							} else {
-
+								Utilidades.pausa();
+								break;
 							}
-							Utilidades.pausa();
-							break;
 						}
 
 					}
@@ -132,7 +150,7 @@ public class CRUDArray {
 						break;
 					}
 				}
-				
+
 				break;
 			}
 
@@ -171,7 +189,7 @@ public class CRUDArray {
 				esnumero = Utilidades.sonNumeros(busqueda);
 				if (esnumero) {
 					contador = Integer.parseInt(busqueda);
-					if (contador < posiciones) {
+					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
 						System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
 						nuevoTitulo = anadirTitulo();
 						titulo[contador] = nuevoTitulo;
@@ -180,25 +198,29 @@ public class CRUDArray {
 						nuevaFecha = anadirFecha();
 						fechaLimite[contador] = nuevaFecha;
 						System.out.println(titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+					} else {
+						System.out.println("Lo siento, no encuentro lo que quieres modificar");
+						Utilidades.pausa();
+						break;
 					}
 				} else if (!esnumero) {
 					contador = buscarPosicionNombre(titulo, busqueda);
-					if (contador >= 0 && contador < posiciones) {
-					System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
-					nuevoTitulo = anadirTitulo();
-					titulo[contador] = nuevoTitulo;
-					nuevaDescripcion = anadirDescripcion();
-					descripcion[contador] = nuevaDescripcion;
-					nuevaFecha = anadirFecha();
-					fechaLimite[contador] = nuevaFecha;
-					System.out
-							.println("\n" + titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
-				
-					}else {
-						System.out.println("Lo siento, no encuentro lo que buscas");
-					}
+					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
+						System.out.println("Modificando " + titulo[contador] + " del " + fechaLimite[contador]);
+						nuevoTitulo = anadirTitulo();
+						titulo[contador] = nuevoTitulo;
+						nuevaDescripcion = anadirDescripcion();
+						descripcion[contador] = nuevaDescripcion;
+						nuevaFecha = anadirFecha();
+						fechaLimite[contador] = nuevaFecha;
+						System.out.println(
+								"\n" + titulo[contador] + " ha sido modificado para el " + fechaLimite[contador]);
+
 					} else {
-					System.out.println("Lo siento, no encuentro lo que buscas");
+						System.out.println("No encuentro lo que quieres modificar");
+						Utilidades.pausa();
+						break;
+					}
 				}
 			}
 			case 4: {
@@ -206,7 +228,7 @@ public class CRUDArray {
 				esnumero = Utilidades.sonNumeros(busqueda);
 				if (esnumero) {
 					contador = Integer.parseInt(busqueda);
-					if (contador < posiciones) {
+					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
 						sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
 								+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
 						if (sino == 's') {
@@ -218,23 +240,34 @@ public class CRUDArray {
 						} else {
 
 						}
+						Utilidades.pausa();
+						break;
+					} else {
+						System.out.println("No encuentro lo que quieres borrar");
+						Utilidades.pausa();
 						break;
 					}
 				} else if (!esnumero) {
 					contador = buscarPosicionNombre(titulo, busqueda);
-					sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
-							+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
-					if (sino == 's') {
+					if (contador >= 0 && contador < posiciones && titulo[contador] != null) {
+						sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + titulo[contador] + " del "
+								+ fechaLimite[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
+						if (sino == 's') {
 
-						titulo[contador] = null;
-						descripcion[contador] = null;
-						fechaLimite[contador] = null;
-						System.out.println("\nTarea borrada con éxito");
+							titulo[contador] = null;
+							descripcion[contador] = null;
+							fechaLimite[contador] = null;
+							System.out.println("\nTarea borrada con éxito");
+							Utilidades.pausa();
 
+						} else {
+							Utilidades.pausa();
+							break;
+						}
 					} else {
-
+						Utilidades.pausa();
+						break;
 					}
-					break;
 				}
 
 			}
@@ -244,7 +277,7 @@ public class CRUDArray {
 				if (contador >= 0 && contador < posiciones) {
 					System.out.println(
 							titulo[contador] + " -- " + descripcion[contador] + " -- " + fechaLimite[contador]);
-					
+
 				}
 				Utilidades.pausa();
 				break;
@@ -360,7 +393,7 @@ public class CRUDArray {
 
 		if (longitud > 0) {
 			do {
-				if (lista[i].equals(nombre)) {
+				if (lista[i] != null && lista[i].equals(nombre)) {
 					posicion = i;
 					encontrado = true;
 				}
