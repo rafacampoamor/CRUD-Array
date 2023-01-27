@@ -5,7 +5,7 @@ public class CRUDArray extends Tarea {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int selector = 0;
-		
+
 		Tarea nuevaTarea = new Tarea();
 
 		do {
@@ -30,9 +30,7 @@ public class CRUDArray extends Tarea {
 				default:
 					break;
 				}
-
 			}
-
 			case 2: {
 				crearTarea(nuevaTarea);
 				break;
@@ -47,7 +45,7 @@ public class CRUDArray extends Tarea {
 			}
 			case 5: {
 				buscarTarea(nuevaTarea);
-				
+
 				break;
 			}
 
@@ -58,19 +56,35 @@ public class CRUDArray extends Tarea {
 
 	}
 
+	/**
+	 * 
+	 * Permite buscar una tarea específica en la lista de tareas.
+	 * 
+	 * @param nuevaTarea objeto de tipo Tarea que contiene la lista de tareas.
+	 */
 	private static void buscarTarea(Tarea nuevaTarea) {
-		// TODO Auto-generated method stub
-	
-		
+
 		String busqueda = Utilidades.PedirString("\nBuscar Tarea:");
 		int contador = buscarPosicionNombre(nuevaTarea.getTitulo(), busqueda);
 		if (contador >= 0 && contador < nuevaTarea.getPosiciones()) {
-			System.out.println(
-					nuevaTarea.getTitulo()[contador] + " -- " + nuevaTarea.getDescripcion()[contador] + " -- " + nuevaTarea.getFechaLimite()[contador]);
+			System.out.println(nuevaTarea.getTitulo()[contador] + " -- " + nuevaTarea.getDescripcion()[contador]
+					+ " -- " + nuevaTarea.getFechaLimite()[contador]);
 		}
 		Utilidades.pausa();
 	}
 
+	/**
+	 * 
+	 * Recibe una tarea y permite al usuario borrar una tarea existente. El usuario
+	 * debe ingresar el nombre o el número de la tarea que desea borrar. Si el
+	 * nombre o número ingresado corresponde a una tarea existente, se le preguntará
+	 * al usuario si está seguro de querer borrar la tarea. Si el usuario confirma,
+	 * la tarea será borrada. En caso contrario, la tarea no será borrada. Si el
+	 * nombre o número ingresado no corresponde a una tarea existente, se informará
+	 * al usuario de que no se pudo encontrar la tarea.
+	 * 
+	 * @param nuevaTarea La tarea a ser borrada.
+	 */
 	private static void borrarTarea(Tarea nuevaTarea) {
 		// TODO Auto-generated method stub
 		int contador = 0;
@@ -136,8 +150,16 @@ public class CRUDArray extends Tarea {
 		}
 	}
 
+	/**
+	 * Recibe una tarea y permite al usuario modificar una tarea existente. El
+	 * usuario debe ingresar el nombre o el número de la tarea que desea modificar.
+	 * Si el nombre o número ingresado no corresponde a una tarea existente, se
+	 * informará al usuario de que no se pudo encontrar la tarea.
+	 * 
+	 * @param nuevaTareaLa tarea a modificar
+	 */
 	private static void modificarTarea(Tarea nuevaTarea) {
-		// TODO Auto-generated method stub
+
 		int contador = 0;
 
 		String busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
@@ -161,8 +183,15 @@ public class CRUDArray extends Tarea {
 		}
 	}
 
+	/**
+	 * 
+	 * Este método lista todas las tareas existentes en la lista de tareas. Si la
+	 * lista está vacía, se pregunta al usuario si desea añadir una nueva tarea.
+	 * 
+	 * @param nuevaTarea Objeto Tarea que contiene las tareas existentes.
+	 */
 	private static void listarTareas(Tarea nuevaTarea) {
-		// TODO Auto-generated method stub
+
 		// Aqui se listan todas las tareas
 		System.out.println("\n\n LISTA DE\n TAREAS\n-----------------\n\n");
 		int contador = 0;
