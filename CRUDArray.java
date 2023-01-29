@@ -47,39 +47,40 @@ public class CRUDArray extends Tarea {
 	 * @param unaTarea objeto de tipo Tarea que contiene la lista de tareas.
 	 */
 	private static void buscarTarea(Tarea unaTarea) {
-		boolean ListaVacia =true;
+		boolean ListaVacia = true;
 		int selector;
 		String busqueda = Utilidades.PedirString("\nBuscar Tarea:");
 		int contador = buscarPosicionNombre(unaTarea.getTitulo(), busqueda);
 		if (contador >= 0 && contador < unaTarea.getPosiciones()) {
-			ListaVacia=false;
+			ListaVacia = false;
 			System.out.println(unaTarea.getTitulo()[contador] + " -- " + unaTarea.getDescripcion()[contador] + " -- "
 					+ unaTarea.getFechaLimite()[contador]);
 		}
-		// aqui va un menú contextual para modificar o borrar en el caso de que muestre lista
-				if (!ListaVacia) {
-					do {
-						selector = submenu();
-						switch (selector) {
-						case 1: {
-							modificarTarea(unaTarea);
-							selector = 3;
-							Utilidades.pausa();
-							break;
-						}
-						case 2: {
-							borrarTarea(unaTarea);
-							selector = 3;
-							Utilidades.pausa();
-							break;
-						}
-
-						default:
-							break;
-						}
-					} while (selector != 3);
+		// aqui va un menú contextual para modificar o borrar en el caso de que muestre
+		// lista
+		if (!ListaVacia) {
+			do {
+				selector = submenu();
+				switch (selector) {
+				case 1: {
+					modificarTarea(unaTarea);
+					selector = 3;
+					Utilidades.pausa();
+					break;
 				}
-		
+				case 2: {
+					borrarTarea(unaTarea);
+					selector = 3;
+					Utilidades.pausa();
+					break;
+				}
+
+				default:
+					break;
+				}
+			} while (selector != 3);
+		}
+
 	}
 
 	/**
@@ -100,6 +101,8 @@ public class CRUDArray extends Tarea {
 		boolean esnumero = false;
 		char sino = 'n';
 
+		// Se pide un comando de búsqueda por consola. Posteriormente se determina si se
+		// trata de una posición del Array o del título de una tarea
 		String busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
 		esnumero = Utilidades.sonNumeros(busqueda);
 		if (esnumero) {
@@ -155,6 +158,8 @@ public class CRUDArray extends Tarea {
 
 		int contador = 0;
 
+		// Se pide un comando de búsqueda por consola. Posteriormente se determina si se
+		// trata de una posición del Array o del título de una tarea
 		String busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
 		boolean esnumero = Utilidades.sonNumeros(busqueda);
 		if (esnumero) {
@@ -224,7 +229,8 @@ public class CRUDArray extends Tarea {
 
 			}
 		}
-		// aqui va un menú contextual para modificar o borrar en el caso de que muestre lista
+		// aqui va un menú contextual para modificar o borrar en el caso de que muestre
+		// lista
 		if (!ListaVacia) {
 			do {
 				selector = submenu();
@@ -261,6 +267,8 @@ public class CRUDArray extends Tarea {
 		boolean lleno = false;
 		boolean encontrado = false;
 
+		// Se busca la primera posición vacía del array. En caso contrario, se valida
+		// como lleno.
 		do {
 			if (nuevaTarea.getTitulo()[contador] == null) {
 				encontrado = true;
@@ -274,6 +282,8 @@ public class CRUDArray extends Tarea {
 			}
 		} while (contador < nuevaTarea.getTitulo().length && !encontrado);
 
+		// Si hay posiciones libres en el array, se coge la primera y se piden datos
+		// para ingresar. Confirmando parte de los datos al final del proceso
 		if (encontrado && !lleno) {
 
 			nuevaTarea.getTitulo()[contador] = anadirTitulo();
@@ -387,6 +397,7 @@ public class CRUDArray extends Tarea {
 		int posicion = -1;
 		boolean encontrado = false;
 
+		// se recorre el array buscando el texto introducido
 		if (longitud > 0) {
 			do {
 				if (lista[i] != null && lista[i].equals(nombre)) {
@@ -396,6 +407,8 @@ public class CRUDArray extends Tarea {
 				i++;
 			} while (i < longitud && !encontrado);
 		}
+
+		// si no se encuentra tras recorrer todo el Array, se devuelve un error.
 		if (!encontrado) {
 			System.out.println("Lo siento, no encuentro " + nombre + ".");
 		}
