@@ -333,8 +333,9 @@ public class CRUDArray extends Tarea {
 	 * @return el título de la tarea introducido por el usuario.
 	 */
 	private static String anadirTitulo() {
+		String nuevoTitulo;
 		System.out.println("" + "\n\n     AÑADIR TAREA\n-----------------\n\n");
-		String nuevoTitulo = Utilidades.PedirString("Titulo de la tarea:");
+		nuevoTitulo = Utilidades.PedirString("Titulo de la tarea:");
 
 		return nuevoTitulo;
 	}
@@ -347,8 +348,9 @@ public class CRUDArray extends Tarea {
 	 * @return la descripción de la tarea introducida por el usuario.
 	 */
 	private static String anadirDescripcion() {
+		String nuevaDescripcion;
 		System.out.println("\n\n     AÑADIR DESCRIPCIÓN\n-----------------\n\n");
-		String nuevaDescripcion = Utilidades.PedirString("Descripción de la tarea");
+		nuevaDescripcion = Utilidades.PedirString("Descripción de la tarea");
 
 		return nuevaDescripcion;
 	}
@@ -361,8 +363,9 @@ public class CRUDArray extends Tarea {
 	 * @return la fecha de la tarea introducida por el usuario.
 	 */
 	private static Date anadirFecha() {
+		Date nuevaFecha;
 		System.out.println("\n\n     AÑADIR FECHA\n-----------------\n\n");
-		Date nuevaFecha = Utilidades.pedirFecha("Fecha límite:");
+		nuevaFecha = Utilidades.pedirFecha("Fecha límite:");
 		return nuevaFecha;
 	}
 
