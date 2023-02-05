@@ -91,9 +91,9 @@ public class Utilidades {
 	 * la entrada del usuario.
 	 */
 	public static void pausa() {
-		Scanner scan = new Scanner(System.in);
+		Scanner lector = new Scanner(System.in);
 		System.out.println("\nPresiona ENTER para continuar...");
-		scan.nextLine();
+		lector.nextLine();
 	}
 
 	/**
