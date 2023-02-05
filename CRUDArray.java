@@ -10,31 +10,31 @@ public class CRUDArray extends Tarea {
 		do {
 			selector = menu();
 			switch (selector) {
-			case 1: {
+				case 1: {
 
-				// Aqui se listan todas las tareas y se añade una si el Array está vacío
-				listarTareas(unaTarea);
-				break;
-			}
-			case 2: {
-				crearTarea(unaTarea);
-				break;
-			}
-			case 3: {
-				modificarTarea(unaTarea);
-				break;
-			}
-			case 4: {
-				borrarTarea(unaTarea);
-				break;
-			}
-			case 5: {
-				buscarTarea(unaTarea);
-				break;
-			}
+					// Aqui se listan todas las tareas y se añade una si el Array está vacío
+					listarTareas(unaTarea);
+					break;
+				}
+				case 2: {
+					crearTarea(unaTarea);
+					break;
+				}
+				case 3: {
+					modificarTarea(unaTarea);
+					break;
+				}
+				case 4: {
+					borrarTarea(unaTarea);
+					break;
+				}
+				case 5: {
+					buscarTarea(unaTarea);
+					break;
+				}
 
-			default:
-				break;
+				default:
+					break;
 			}
 		} while (selector != 6);
 
@@ -62,21 +62,21 @@ public class CRUDArray extends Tarea {
 			do {
 				selector = submenu();
 				switch (selector) {
-				case 1: {
-					modificarTarea(unaTarea);
-					selector = 3;
-					Utilidades.pausa();
-					break;
-				}
-				case 2: {
-					borrarTarea(unaTarea);
-					selector = 3;
-					Utilidades.pausa();
-					break;
-				}
+					case 1: {
+						modificarTarea(unaTarea);
+						selector = 3;
+						Utilidades.pausa();
+						break;
+					}
+					case 2: {
+						borrarTarea(unaTarea);
+						selector = 3;
+						Utilidades.pausa();
+						break;
+					}
 
-				default:
-					break;
+					default:
+						break;
 				}
 			} while (selector != 3);
 		}
@@ -235,19 +235,19 @@ public class CRUDArray extends Tarea {
 			do {
 				selector = submenu();
 				switch (selector) {
-				case 1: {
-					modificarTarea(unaTarea);
-					selector = 3;
-					break;
-				}
-				case 2: {
-					borrarTarea(unaTarea);
-					selector = 3;
-					break;
-				}
+					case 1: {
+						modificarTarea(unaTarea);
+						selector = 3;
+						break;
+					}
+					case 2: {
+						borrarTarea(unaTarea);
+						selector = 3;
+						break;
+					}
 
-				default:
-					break;
+					default:
+						break;
 				}
 			} while (selector != 3);
 		}
