@@ -280,7 +280,8 @@ public class CRUDArray extends Tarea {
 		boolean encontrado = false;
 
 		// Se busca la primera posición vacía del array. En caso contrario, se valida
-		// como lleno.
+		// como lleno. Este método tiene un doble check booleano en el que comprueba que
+		// encuentre un hueco y que el array no esté lleno.
 		do {
 			if (nuevaTarea.getTitulo()[contador] == null) {
 				encontrado = true;
