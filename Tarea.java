@@ -12,26 +12,28 @@ public class Tarea {
 		super();
 	}
 	private int posiciones = 20;
+	private int posicion;
 	private String[] titulo = new String[posiciones];
 	private String[] descripcion = new String[posiciones];
 	private Date[] fechaLimite = new Date[posiciones];
+	
 	public String[] getTitulo() {
 		return titulo;
 	}
-	public void setTitulo(String[] titulo) {
-		this.titulo = titulo;
+	public void setTitulo(int posicion, String titulo) {
+		this.titulo[posicion] = titulo;
 	}
 	public String[] getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(String[] descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcion(int posicion, String descripcion) {
+		this.descripcion[posicion] = descripcion;
 	}
 	public Date[] getFechaLimite() {
 		return fechaLimite;
 	}
-	public void setFechaLimite(Date[] fechaLimite) {
-		this.fechaLimite = fechaLimite;
+	public void setFechaLimite(int posicion, Date fechaLimite) {
+		this.fechaLimite[posicion] = fechaLimite;
 	}
 	
 	public int getPosiciones() {
