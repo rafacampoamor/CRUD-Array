@@ -6,7 +6,7 @@ public class CRUDArray {
 		// TODO Auto-generated method stub
 		int selector = 0;
 		int contador = -1;
-		int posiciones = 3;
+		int posiciones = 20;
 		boolean encontrado = false;
 		String[] titulo = new String[posiciones];
 		String[] descripcion = new String[posiciones];
