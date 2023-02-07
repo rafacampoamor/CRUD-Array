@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class CRUDArray extends Tarea {
+public class CRUDArray {
 
 	public static void main(String[] args) {
 		int selector = 0;
@@ -144,9 +144,9 @@ public class CRUDArray extends Tarea {
 				// Se pide confirmación antes de borrar
 				if (sino == 's') {
 
-					unaTarea.getTitulo()[contador] = null;
-					unaTarea.getDescripcion()[contador] = null;
-					unaTarea.getFechaLimite()[contador] = null;
+					unaTarea.setTitulo(contador, null);
+					unaTarea.setDescripcion(contador, null);
+					unaTarea.setFechaLimite(contador, null);
 					System.out.println("\nTarea borrada con éxito");
 				} else {
 
@@ -167,9 +167,10 @@ public class CRUDArray extends Tarea {
 				// Se pide confirmación antes de borrar
 				if (sino == 's') {
 
-					unaTarea.getTitulo()[contador] = null;
-					unaTarea.getDescripcion()[contador] = null;
-					unaTarea.getFechaLimite()[contador] = null;
+					unaTarea.setTitulo(contador, null);
+					unaTarea.setDescripcion(contador, null);
+					unaTarea.setFechaLimite(contador, null);
+
 					System.out.println("\nTarea borrada con éxito");
 					Utilidades.pausa();
 
@@ -205,11 +206,11 @@ public class CRUDArray extends Tarea {
 			if (contador >= 0 && contador < unaTarea.getPosiciones() && unaTarea.getTitulo()[contador] != null) {
 				System.out.println("Modificando " + unaTarea.getTitulo()[contador] + " del "
 						+ unaTarea.getFechaLimite()[contador]);
-				// En caso de que no esté vacía, empieza la secuencia de modificación
-
-				unaTarea.getTitulo()[contador] = anadirTitulo();
-				unaTarea.getDescripcion()[contador] = anadirDescripcion();
-				unaTarea.getFechaLimite()[contador] = anadirFecha();
+				// En caso de que no esté vacía, empieza la s
+				
+				unaTarea.setTitulo(contador, anadirTitulo());
+				unaTarea.setDescripcion(contador, anadirDescripcion());
+				unaTarea.setFechaLimite(contador, anadirFecha());
 				System.out.println(unaTarea.getTitulo()[contador] + " ha sido modificado para el "
 						+ unaTarea.getFechaLimite()[contador]);
 				// En caso de que esa posición no exista o esté vacía, muestra un error
@@ -225,10 +226,10 @@ public class CRUDArray extends Tarea {
 			if (contador >= 0) {
 				System.out.println("Modificando " + unaTarea.getTitulo()[contador] + " del "
 						+ unaTarea.getFechaLimite()[contador]);
-
-				unaTarea.getTitulo()[contador] = anadirTitulo();
-				unaTarea.getDescripcion()[contador] = anadirDescripcion();
-				unaTarea.getFechaLimite()[contador] = anadirFecha();
+				
+				unaTarea.setTitulo(contador, anadirTitulo());
+				unaTarea.setDescripcion(contador, anadirDescripcion());
+				unaTarea.setFechaLimite(contador, anadirFecha());
 				System.out.println("\n" + unaTarea.getTitulo()[contador] + " ha sido modificado para el "
 						+ unaTarea.getFechaLimite()[contador]);
 				// En caso de no encontrar la tarea, muestra un error
@@ -325,9 +326,9 @@ public class CRUDArray extends Tarea {
 		// para ingresar. Confirmando parte de los datos al final del proceso
 		if (encontrado) {
 
-			nuevaTarea.getTitulo()[contador] = anadirTitulo();
-			nuevaTarea.getDescripcion()[contador] = anadirDescripcion();
-			nuevaTarea.getFechaLimite()[contador] = anadirFecha();
+			nuevaTarea.setTitulo(contador, anadirTitulo());
+			nuevaTarea.setDescripcion(contador, anadirDescripcion());
+			nuevaTarea.setFechaLimite(contador, anadirFecha());
 			System.out.println("\n" + nuevaTarea.getTitulo()[contador] + " ha sido añadido para el "
 					+ nuevaTarea.getFechaLimite()[contador]);
 			Utilidades.pausa();
