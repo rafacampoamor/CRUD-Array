@@ -11,8 +11,6 @@ public class CRUDArray extends Tarea {
 			selector = menu();
 			switch (selector) {
 				case 1: {
-
-					// Aqui se listan todas las tareas y se añade una si el Array está vacío
 					listarTareas(unaTarea);
 					break;
 				}
