@@ -11,7 +11,7 @@ public class Tarea {
 	public Tarea() {
 		super();
 	}
-	private int posiciones = 3;
+	private int posiciones = 20;
 	private String[] titulo = new String[posiciones];
 	private String[] descripcion = new String[posiciones];
 	private Date[] fechaLimite = new Date[posiciones];
