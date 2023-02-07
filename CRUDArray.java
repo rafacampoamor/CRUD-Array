@@ -93,7 +93,7 @@ public class CRUDArray extends Tarea {
 	 * nombre o número ingresado no corresponde a una tarea existente, se informará
 	 * al usuario de que no se pudo encontrar la tarea.
 	 * 
-	 * @param unaTarea La tarea a ser borrada.
+	 * @param unaTarea La tarea a borrar.
 	 */
 	private static void borrarTarea(Tarea unaTarea) {
 		// TODO Auto-generated method stub
@@ -268,10 +268,9 @@ public class CRUDArray extends Tarea {
 
 	/**
 	 * 
-	 * El método 'crearTarea' se encarga de crear una nueva tarea en el array de
-	 * tareas. Si el array está lleno, se mostrará un mensaje de error. Si el array
-	 * no está lleno, se pedirá al usuario que ingrese el título, descripción y
-	 * fecha límite de la tarea.
+	 * Crea una nueva tarea en el array de tareas. Si el array está lleno, se
+	 * mostrará un mensaje de error. Si el array no está lleno, se pedirá al usuario
+	 * que ingrese el título, descripción y fecha límite de la tarea.
 	 * 
 	 * @param nuevaTarea es la tarea que se va a crear
 	 */
