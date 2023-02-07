@@ -21,18 +21,21 @@ public class Tarea {
 		return titulo;
 	}
 	public void setTitulo(int posicion, String titulo) {
+		//para hacer funcionar este setter, he tirado de Google
 		this.titulo[posicion] = titulo;
 	}
 	public String[] getDescripcion() {
 		return descripcion;
 	}
 	public void setDescripcion(int posicion, String descripcion) {
+		//para hacer funcionar este setter, he tirado de Google
 		this.descripcion[posicion] = descripcion;
 	}
 	public Date[] getFechaLimite() {
 		return fechaLimite;
 	}
 	public void setFechaLimite(int posicion, Date fechaLimite) {
+		//para hacer funcionar este setter, he tirado de Google
 		this.fechaLimite[posicion] = fechaLimite;
 	}
 	
