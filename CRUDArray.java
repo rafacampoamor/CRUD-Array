@@ -3,7 +3,6 @@ import java.util.Date;
 public class CRUDArray extends Tarea {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int selector = 0;
 		Tarea unaTarea = new Tarea();
 
@@ -85,13 +84,43 @@ public class CRUDArray extends Tarea {
 
 	/**
 	 * 
-	 * Recibe una tarea y permite al usuario borrar una tarea existente. El usuario
-	 * debe ingresar el nombre o el número de la tarea que desea borrar. Si el
-	 * nombre o número ingresado corresponde a una tarea existente, se le preguntará
-	 * al usuario si está seguro de querer borrar la tarea. Si el usuario confirma,
-	 * la tarea será borrada. En caso contrario, la tarea no será borrada. Si el
-	 * nombre o número ingresado no corresponde a una tarea existente, se informará
-	 * al usuario de que no se pudo encontrar la tarea.
+	 * Muestra un menú con opciones para interactuar con una lista de tareas y
+	 * devuelve la opción seleccionada por el usuario.
+	 * 
+	 * @return int - La opción seleccionada por el usuario
+	 */
+	private static int menu() {
+
+		int selector = Utilidades.pedirInt(
+				"\n====EVIL CORP====\n   TAREAS 0.1    \n-----------------\n\n[1] Lista Tareas\n[2] Añadir Tarea\n[3] Modificar Tarea\n[4] Eliminar Tarea\n[5] Buscar Tarea\n[6] Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
+		return selector;
+	}
+
+	/**
+	 * 
+	 * Muestra un menú con las opciones de modificar una tarea, borrar una tarea o
+	 * salir. El usuario selecciona una opción y el método devuelve el número de la
+	 * opción seleccionada.
+	 * 
+	 * @return int La opción seleccionada por el usuario.
+	 */
+	private static int submenu() {
+
+		int selector = Utilidades.pedirInt(
+				"\n¿Qué quieres hacer?\n\n[1] Modificar una tarea\n[2] Borrar una tarea\n[3] Atrás\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
+		return selector;
+	}
+
+	/**
+	 * 
+	 * Recibe una tarea y permite al usuario borrar una tarea existente.
+	 * El usuario debe ingresar el nombre o el número de la tarea que desea borrar.
+	 * Si el nombre o número ingresado corresponde a una tarea existente, se le
+	 * preguntará al usuario si está seguro de querer borrar la tarea.
+	 * Si el usuario confirma, la tarea será borrada. En caso contrario, la tarea no
+	 * será borrada.
+	 * Si el nombre o número ingresado no corresponde a una tarea existente, se
+	 * informará al usuario de que no se pudo encontrar la tarea.
 	 * 
 	 * @param unaTarea La tarea a borrar.
 	 */
@@ -168,10 +197,10 @@ public class CRUDArray extends Tarea {
 		// Se pide un comando de búsqueda por consola. Posteriormente se determina si se
 		// trata de una posición del Array o del título de una tarea
 		String busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
-		boolean esnumero = Utilidades.sonNumeros(busqueda);
+		boolean esNumero = Utilidades.sonNumeros(busqueda);
 		// Si el comando introducido es número, busca esa posición en la consola y
 		// tenermina que no esté vacía
-		if (esnumero) {
+		if (esNumero) {
 			contador = Integer.parseInt(busqueda);
 			if (contador >= 0 && contador < unaTarea.getPosiciones() && unaTarea.getTitulo()[contador] != null) {
 				System.out.println("Modificando " + unaTarea.getTitulo()[contador] + " del "
@@ -190,7 +219,7 @@ public class CRUDArray extends Tarea {
 
 			}
 			// Si no se trata de un número, busca en el Array titulo una coincidencia
-		} else if (!esnumero) {
+		} else if (!esNumero) {
 			contador = buscarPosicionNombre(unaTarea.getTitulo(), busqueda);
 			// En caso de que encuentre coincidencia, incia la secuencia de modificación
 			if (contador >= 0) {
@@ -276,19 +305,16 @@ public class CRUDArray extends Tarea {
 	 */
 	private static void crearTarea(Tarea nuevaTarea) {
 		int contador = 0;
-		boolean lleno = false;
 		boolean encontrado = false;
 
 		// Se busca la primera posición vacía del array. En caso contrario, se valida
-		// como lleno. Este método tiene un doble check booleano en el que comprueba que
-		// encuentre un hueco y que el array no esté lleno.
+		// como lleno y se muestra un error.
 		do {
 			if (nuevaTarea.getTitulo()[contador] == null) {
 				encontrado = true;
 			} else {
 				contador++;
 				if (contador == nuevaTarea.getTitulo().length) {
-					lleno = true;
 					errorLleno(nuevaTarea.getTitulo().length);
 
 				}
@@ -297,7 +323,7 @@ public class CRUDArray extends Tarea {
 
 		// Si hay posiciones libres en el array, se coge la primera y se piden datos
 		// para ingresar. Confirmando parte de los datos al final del proceso
-		if (encontrado && !lleno) {
+		if (encontrado) {
 
 			nuevaTarea.getTitulo()[contador] = anadirTitulo();
 			nuevaTarea.getDescripcion()[contador] = anadirDescripcion();
@@ -307,35 +333,6 @@ public class CRUDArray extends Tarea {
 			Utilidades.pausa();
 
 		}
-	}
-
-	/**
-	 * 
-	 * Muestra un menú con opciones para interactuar con una lista de tareas y
-	 * devuelve la opción seleccionada por el usuario.
-	 * 
-	 * @return int - La opción seleccionada por el usuario
-	 */
-	private static int menu() {
-
-		int selector = Utilidades.pedirInt(
-				"\n====EVIL CORP====\n   TAREAS 0.1    \n-----------------\n\n[1] Lista Tareas\n[2] Añadir Tarea\n[3] Modificar Tarea\n[4] Eliminar Tarea\n[5] Buscar Tarea\n[6] Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
-		return selector;
-	}
-
-	/**
-	 * 
-	 * Muestra un menú con las opciones de modificar una tarea, borrar una tarea o
-	 * salir. El usuario selecciona una opción y el método devuelve el número de la
-	 * opción seleccionada.
-	 * 
-	 * @return int La opción seleccionada por el usuario.
-	 */
-	private static int submenu() {
-
-		int selector = Utilidades.pedirInt(
-				"\n¿Qué quieres hacer?\n\n[1] Modificar una tarea\n[2] Borrar una tarea\n[3] Atrás\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
-		return selector;
 	}
 
 	/**
@@ -383,11 +380,11 @@ public class CRUDArray extends Tarea {
 	}
 
 	/**
-	 * Muestra un mensaje de error en pantalla indicando que la memoria está llena y
+	 * Muestra un mensaje de error en pantalla indicando que el Array está lleno y
 	 * pregunta al usuario si desea borrar algo.
 	 * 
 	 * @param posiciones Es un entero que indica cuantas tareas han sido añadidas
-	 *                   antes de que ocurra el error de memoria llena.
+	 *                   antes de que ocurra el error de Array lleno.
 	 */
 	private static void errorLleno(int posiciones) {
 		System.out.println("\n\n     ERROR\nLa memoria está llena\n" + posiciones
