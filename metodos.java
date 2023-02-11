@@ -1,49 +1,13 @@
 import java.util.Date;
 
-public class CRUDArray {
-
-	public static void main(String[] args) {
-		int selector = 0;
-		Tarea unaTarea = new Tarea();
-
-		do {
-			selector = menu();
-			switch (selector) {
-				case 1: {
-					listarTareas(unaTarea);
-					break;
-				}
-				case 2: {
-					crearTarea(unaTarea);
-					break;
-				}
-				case 3: {
-					modificarTarea(unaTarea);
-					break;
-				}
-				case 4: {
-					borrarTarea(unaTarea);
-					break;
-				}
-				case 5: {
-					buscarTarea(unaTarea);
-					break;
-				}
-
-				default:
-					break;
-			}
-		} while (selector != 6);
-
-	}
-
-	/**
+public class metodos {
+   	/**
 	 * 
 	 * Permite buscar una tarea específica en la lista de tareas.
 	 * 
 	 * @param unaTarea objeto de tipo Tarea que contiene la lista de tareas.
 	 */
-	private static void buscarTarea(Tarea unaTarea) {
+	public static void buscarTarea(Tarea unaTarea) {
 		boolean ListaVacia = true;
 		int selector;
 		// Pedimos una inserción de texto para buscar
@@ -89,7 +53,7 @@ public class CRUDArray {
 	 * 
 	 * @return int - La opción seleccionada por el usuario
 	 */
-	private static int menu() {
+	public static int menu() {
 
 		int selector = Utilidades.pedirInt(
 				"\n====EVIL CORP====\n   TAREAS 0.1    \n-----------------\n\n[1] Lista Tareas\n[2] Añadir Tarea\n[3] Modificar Tarea\n[4] Eliminar Tarea\n[5] Buscar Tarea\n[6] Salir\n-----------------\n\n   Selecciona \n   una opción\n\n-----------------");
@@ -124,7 +88,7 @@ public class CRUDArray {
 	 * 
 	 * @param unaTarea La tarea a borrar.
 	 */
-	private static void borrarTarea(Tarea unaTarea) {
+	public static void borrarTarea(Tarea unaTarea) {
 		// TODO Auto-generated method stub
 		int contador = 0;
 		boolean esnumero = false;
@@ -191,7 +155,7 @@ public class CRUDArray {
 	 * 
 	 * @param nuevaTareaLa tarea a modificar
 	 */
-	private static void modificarTarea(Tarea unaTarea) {
+	public static void modificarTarea(Tarea unaTarea) {
 
 		int contador = 0;
 
@@ -247,7 +211,7 @@ public class CRUDArray {
 	 * 
 	 * @param unaTarea Objeto Tarea que contiene las tareas existentes.
 	 */
-	private static void listarTareas(Tarea unaTarea) {
+	public static void listarTareas(Tarea unaTarea) {
 		int selector;
 
 		// Aqui se listan todas las tareas en caso de que las haya
@@ -304,7 +268,7 @@ public class CRUDArray {
 	 * 
 	 * @param nuevaTarea es la tarea que se va a crear
 	 */
-	private static void crearTarea(Tarea nuevaTarea) {
+	public static void crearTarea(Tarea nuevaTarea) {
 		int contador = 0;
 		boolean encontrado = false;
 
@@ -433,3 +397,4 @@ public class CRUDArray {
 	}
 
 }
+
