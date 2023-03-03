@@ -1,8 +1,8 @@
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 
 public class Tarea {
-	public Tarea(String[] titulo, String[] descripcion, Date[] fechaLimite) {
+	public Tarea(String[] titulo, String[] descripcion, LocalDate[] fechaLimite) {
 		super();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -14,7 +14,7 @@ public class Tarea {
 	private int posiciones = 20;
 	private String[] titulo = new String[posiciones];
 	private String[] descripcion = new String[posiciones];
-	private Date[] fechaLimite = new Date[posiciones];
+	private LocalDate[] fechaLimite = new LocalDate[posiciones];
 	
 	public String[] getTitulo() {
 		return titulo;
@@ -30,10 +30,10 @@ public class Tarea {
 		//para hacer funcionar este setter, he tirado de Google
 		this.descripcion[posicion] = descripcion;
 	}
-	public Date[] getFechaLimite() {
+	public LocalDate[] getFechaLimite() {
 		return fechaLimite;
 	}
-	public void setFechaLimite(int posicion, Date fechaLimite) {
+	public void setFechaLimite(int posicion, LocalDate fechaLimite) {
 		//para hacer funcionar este setter, he tirado de Google
 		this.fechaLimite[posicion] = fechaLimite;
 	}

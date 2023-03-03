@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 public class metodos {
@@ -11,7 +12,7 @@ public class metodos {
 		boolean ListaVacia = true;
 		int selector;
 		// Pedimos una inserción de texto para buscar
-		String busqueda = Utilidades.PedirString("\nBuscar Tarea:");
+		String busqueda = Utilidades.pedirString("\nBuscar Tarea:");
 		int contador = buscarPosicionNombre(unaTarea.getTitulo(), busqueda);
 		// Si encuentra algo, lo muestra por pantalla junto a un menú contextual
 		if (contador >= 0 && contador < unaTarea.getPosiciones()) {
@@ -96,14 +97,14 @@ public class metodos {
 
 		// Se pide un comando de búsqueda por consola. Posteriormente se determina si se
 		// trata de una posición del Array o del título de una tarea
-		String busqueda = Utilidades.PedirString("\n¿Qué quieres borrar?");
+		String busqueda = Utilidades.pedirString("\n¿Qué quieres borrar?");
 		esnumero = Utilidades.sonNumeros(busqueda);
 		// Si se trata de un número, busca esa posición en el Array
 		if (esnumero) {
 			contador = Integer.parseInt(busqueda);
 			// Si esa posición existe y no está vacía, vacía la posición en los tres arrays
 			if (contador >= 0 && contador < unaTarea.getPosiciones() && unaTarea.getTitulo()[contador] != null) {
-				sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + unaTarea.getTitulo()[contador] + " del "
+				sino = Utilidades.pedirChar("\n¿Seguro que quieres borrar " + unaTarea.getTitulo()[contador] + " del "
 						+ unaTarea.getFechaLimite()[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
 				// Se pide confirmación antes de borrar
 				if (sino == 's') {
@@ -126,7 +127,7 @@ public class metodos {
 		} else if (!esnumero) {
 			contador = buscarPosicionNombre(unaTarea.getTitulo(), busqueda);
 			if (contador >= 0 && contador < unaTarea.getPosiciones() && unaTarea.getTitulo()[contador] != null) {
-				sino = Utilidades.PedirChar("\n¿Seguro que quieres borrar " + unaTarea.getTitulo()[contador] + " del "
+				sino = Utilidades.pedirChar("\n¿Seguro que quieres borrar " + unaTarea.getTitulo()[contador] + " del "
 						+ unaTarea.getFechaLimite()[contador] + "? (S/N)\nEste cambio no se podrá deshacer");
 				// Se pide confirmación antes de borrar
 				if (sino == 's') {
@@ -161,7 +162,7 @@ public class metodos {
 
 		// Se pide un comando de búsqueda por consola. Posteriormente se determina si se
 		// trata de una posición del Array o del título de una tarea
-		String busqueda = Utilidades.PedirString("¿Qué quieres modificar?");
+		String busqueda = Utilidades.pedirString("¿Qué quieres modificar?");
 		boolean esNumero = Utilidades.sonNumeros(busqueda);
 		// Si el comando introducido es número, busca esa posición en la consola y
 		// tenermina que no esté vacía
@@ -230,7 +231,7 @@ public class metodos {
 		if (ListaVacia) {
 			// si no hay tareas, se añade una
 			System.out.println("La lista está vacía");
-			sino = Utilidades.PedirChar("Añadir tarea? (S/N)");
+			sino = Utilidades.pedirChar("Añadir tarea? (S/N)");
 			if (sino == 's') {
 				crearTarea(unaTarea);
 
@@ -310,7 +311,7 @@ public class metodos {
 	private static String anadirTitulo() {
 		String nuevoTitulo;
 		System.out.println("" + "\n\n     AÑADIR TAREA\n-----------------\n\n");
-		nuevoTitulo = Utilidades.PedirString("Titulo de la tarea:");
+		nuevoTitulo = Utilidades.pedirString("Titulo de la tarea:");
 
 		return nuevoTitulo;
 	}
@@ -325,7 +326,7 @@ public class metodos {
 	private static String anadirDescripcion() {
 		String nuevaDescripcion;
 		System.out.println("\n\n     AÑADIR DESCRIPCIÓN\n-----------------\n\n");
-		nuevaDescripcion = Utilidades.PedirString("Descripción de la tarea");
+		nuevaDescripcion = Utilidades.pedirString("Descripción de la tarea");
 
 		return nuevaDescripcion;
 	}
@@ -337,8 +338,8 @@ public class metodos {
 	 * 
 	 * @return la fecha de la tarea introducida por el usuario.
 	 */
-	private static Date anadirFecha() {
-		Date nuevaFecha;
+	private static LocalDate anadirFecha() {
+		LocalDate nuevaFecha;
 		System.out.println("\n\n     AÑADIR FECHA\n-----------------\n\n");
 		nuevaFecha = Utilidades.pedirFecha("Fecha límite:");
 		return nuevaFecha;

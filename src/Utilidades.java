@@ -1,6 +1,7 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Utilidades {
@@ -35,7 +36,7 @@ public class Utilidades {
 	 * @return La cadena de caracteres introducida por el usuario.
 	 */
 
-	public static String PedirString(String texto) {
+	public static String pedirString(String texto) {
 		String cadena;
 		Scanner lector = new Scanner(System.in);
 		System.out.println(texto);
@@ -54,7 +55,7 @@ public class Utilidades {
 	 * @param texto Texto a mostrar al usuario antes de pedir el caracter.
 	 * @return El caracter introducido por el usuario.
 	 */
-	public static char PedirChar(String texto) {
+	public static char pedirChar(String texto) {
 		char caracter;
 		Scanner lector = new Scanner(System.in);
 		System.out.println(texto);
@@ -70,19 +71,24 @@ public class Utilidades {
 	 * @return fecha La fecha introducida por el usuario en formato Date. Si la
 	 *         fecha introducida no es válida, devuelve null.
 	 */
-	public static Date pedirFecha(String texto) {
-		Date fecha = null;
-		Scanner lector = new Scanner(System.in);
-		System.out.println(texto);
-		String fechaString = lector.nextLine();
-		try {
-			fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fechaString);
-		} catch (ParseException e) {
-			System.out
-					.println("La fecha introducida no es válida. Por favor, introduce una fecha en formato dd/MM/yyyy");
-		}
+	public static LocalDate pedirFecha(String texto) {
+		LocalDate fecha = null;
+		boolean fechaValida = false;
+		do {
+			Scanner lector = new Scanner(System.in);
+			System.out.println(texto);
+			String fechaString = lector.nextLine();
+			try {
+				fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				fechaValida = true;
+			} catch (DateTimeParseException e) {
+				System.out.println("La fecha introducida no es válida. Por favor, introduce una fecha en formato dd/MM/yyyy");
+			}
+		} while (!fechaValida);
 		return fecha;
 	}
+	
+	
 
 	/**
 	 * 
@@ -156,5 +162,36 @@ public class Utilidades {
 		}
 		return cadenaASCII;
 	}
+
+	/*
+	 * Devuelve la edad de una persona representada por la fecha proporcionada
+	 * como parámetro, en años completos. La fecha actual se utiliza como punto de
+	 * referencia para calcular la edad.
+	 * 
+	 * @param fecha la fecha de nacimiento o cualquier otra fecha a partir de la
+	 * cual se desea calcular la edad
+	 * 
+	 * @return la edad de la persona representada por la fecha proporcionada, en
+	 * años completos
+	 * 
+	 * @throws DateTimeException si la fecha proporcionada es posterior a la fecha
+	 * actual
+	 */
+	public static int verEdad(LocalDate fecha, String texto) {
+		LocalDate ahora = LocalDate.now();
+		boolean fechaValida = false;
+		do {
+			try {
+				Scanner scanner = new Scanner(System.in);
+				System.out.print(texto + " (YYYY-MM-DD): ");
+				fecha = LocalDate.parse(scanner.nextLine());
+				fechaValida = true;
+			} catch (DateTimeParseException e) {
+				System.err.println("Fecha no válida. Inténtalo de nuevo.");
+			}
+		} while (!fechaValida);
+		return (int) ChronoUnit.YEARS.between(fecha, ahora);
+	}
+
 
 }
