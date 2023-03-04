@@ -11,5 +11,6 @@ La aplicación te permitirá crear, listar, editar y eliminar tareas. También p
 El proyecto consta de las siguientes clases:
 
 * **Tarea**: Clase principal que contiene los atributos y métodos para gestionar las tareas.
+* **Metodos**: Los métodos principales de la aplicación.
 * **Utilidades**: Clase auxiliar que contiene métodos para validar entradas y mostrar mensajes al usuario.
 * **Main**: Clase principal que contiene el método main y es la encargada de ejecutar la aplicación.
